@@ -12,7 +12,11 @@
          test/1]).
 
 show(_Request, Id) ->
-    {ehtml, io_lib:format("Showing foo with Id ~p", [Id])}.
+    PageUrl = reverse:reverse(urlconf:urlconf(), ?MODULE, show, ["123", "3"]),
+    {ehtml, [
+             {h1, [], io_lib:format("Showing foo with Id ~p.", [Id])},
+             {p, [], [{a, [{href, PageUrl}]}, "Page 3"]}
+            ]}.
 
 show(_Request, Id, Page) ->
     {ehtml, io_lib:format("Showing foo with Id ~p and Page ~p", [Id, Page])}.
